@@ -1,0 +1,81 @@
+// Alert ------------------>
+.alert {
+  background: darken($accent, 20%);
+  visibility: hidden;
+  margin: 0;
+  padding-left: 15px;
+  padding-right: 15px;
+  color: #fff;
+  font-size: .8rem;
+  border-radius: 2px;
+  animation: slideDown .5s 1s forwards;
+  overflow: hidden;
+  position: relative;
+  & strong {
+    margin-right: 2px;
+  }
+}
+
+// X button ------------------>
+.close {
+  background: url(../icons/close.png);
+  background-size: contain;
+  width: 10px;
+  height: 10px;
+  position: absolute;
+  top: 17px;
+  right: 13px;
+  &:hover {
+    @extend %hover;
+  }
+}
+
+// Bell notifications --------->
+.notifications {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  padding: 20px;
+  background: $accent;
+  overflow: hidden;
+  width: 200px;
+  border: 1px solid $accent;
+  border-radius: 3px;
+  transform-origin: 50% 0;
+  display: none;
+  @include mq(768px) {
+    width: 250px;
+  }
+  & li {
+    color: #fff;
+    font-size: .8rem;
+    list-style-type: none;
+    position: relative;
+    &:not(:last-of-type) {
+      padding-bottom: 10px;
+      margin-bottom: 10px;
+      border-bottom: 1px solid rgba(#fff, .5);
+    }
+    & .close {
+      top: 2px;
+      right: -5px;
+    }
+  }
+  & a {
+    color: lighten($accent, 35%);
+    font-size: .75rem;
+    font-style: italic;
+    text-decoration: none;
+  }
+}
+
+// Ping Dot ------------------->
+.ping-dot {
+  background: saturate($accent, 30%);
+  position: absolute;
+  top: 0;
+  right: 10px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}

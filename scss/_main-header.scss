@@ -1,0 +1,67 @@
+//header ----------------->
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #fff;
+  border-bottom: 1px solid $bg;
+  z-index: 9;
+  @include grid(header);
+  padding: 0 15px;
+  @include mq(768px) {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 60px;
+  }
+  &__logo {
+    margin-right: auto;
+    font-size: 1.7rem;
+    font-style: italic;
+    font-family: 'Poppins', sans-serif;
+    color: $accent;
+    &:hover {
+      @extend %hover;
+    }
+  }
+  &__notifications {
+    position: relative;
+  }
+  &__icon-bell {
+    height: 20px;
+    margin-right: 10px;
+    transition: all .5s ease;
+    & g {
+      transform-origin: 50% 50%;
+      transform-box: fill-box;
+    }
+    &:hover {
+      @extend %hover;
+      animation: shake .8s backwards;
+    }
+  }
+  &__user {
+    display: flex;
+    align-items: center;
+    border-left: 1px solid lighten($accent, 15%);
+    padding-left: 10px;
+    &:hover {
+      @extend %hover;
+    }
+    &-img {
+      width: 35px;
+      border-radius: 50%;
+    }
+    &-name {
+      font-family: 'Roboto', sans-serif;
+      font-size: .95rem;
+      margin-left: 10px;
+      color: #535353;
+      display: none;
+      @include mq(768px) {
+        display: inline;
+      }
+    }
+  }
+}

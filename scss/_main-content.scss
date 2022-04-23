@@ -1,0 +1,558 @@
+// Main Content ----------------->
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: darken($bg, 10%);
+}
+
+::-webkit-scrollbar-thumb {
+  background: lighten($bg, 2%);
+  border-radius: 5px;
+  border: none;
+}
+
+main {
+  @include grid(main);
+  color: #535353;
+  height: 100%;
+  overflow-x: hidden;
+  @include mq(1200px) {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+}
+
+h2, h3 {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+  margin: 0;
+  display: inline-block;
+}
+
+h2 {
+  font-size: 1.1rem;
+}
+
+h3 {
+  text-transform: uppercase;
+  font-size: .9rem;
+}
+
+// All sections
+.card {
+  background: #fff;
+  &:not(.dashboard__top) {
+    padding: 20px;
+    @include mq(768px) {
+      padding: 30px;
+    }
+  }
+}
+
+.dashboard {
+  &__top {
+    @include grid(dash-top);
+    display: grid;
+    grid-template-columns: minmax(min-content,125px) 1fr;
+    grid-template-rows: 60px 1fr;
+    grid-template-areas:
+      "dash-title dash-search"
+      "dash-traffic dash-traffic";
+    & div {
+      display: flex;
+      align-items: center;
+      &.dash-title {
+        padding-left: 20px;
+        @include grid(dash-title);
+      }
+      &.search {
+        padding-right: 20px;
+        justify-content: flex-end;
+        background: $bg;
+        @include grid(dash-search);
+      }
+    }
+    &-search {
+      border: 1px solid #e3e3e3;
+      outline: none;
+      font-size: .9rem;
+      background-image: url(../icons/search.png);
+      background-position: 95% 50%;
+      background-repeat: no-repeat;
+      padding: 0 10px;
+      height: 35px;
+      width: 50%;
+      min-width: 100px;
+      max-width: 380px;
+      border-radius: 3px;
+      transition: width .2s ease-out,
+                  border .2s ease-out;
+      &::placeholder {
+        font-style: italic;
+        opacity: 0;
+      }
+      &:focus {
+        width: 70%;
+        background-image: none;
+        border: 2px solid $accent;
+      }
+    }
+  }
+  &__traffic { //===================================> Traffic Section
+    @include grid(dash-traffic);
+    & h3 {
+      padding-top: 5px;
+    }
+    & .timeframes {
+      padding: 0;
+      margin: 15px 0 0;
+      display: flex;
+      justify-content: center;
+      @include mq(768px) {
+        float: right;
+        margin: 0;
+      }
+    }
+    & input { // Traffic timeframe items ---------->
+      display: none;
+      &:checked + label {
+        background: $accent;
+        color: #fff;
+      }
+    }
+    & label {
+      display: inline-block;
+      font-family: 'Roboto', sans-serif;
+      font-weight: 500;
+      font-size: .85rem;
+      margin: 0 2px;
+      padding: 5px 10px;
+      border-radius: 12px;
+      transition: background .2s cubic-bezier(.87,-0.02,.35,1.18);
+      &:hover {
+        @extend %hover;
+        color: $accent;
+      }
+    }
+  }
+  &__daily { //===================================> Daily Traffic Section
+    @include grid(dash-daily);
+  }
+  &__mobile { //===================================> Mobile Section
+    @include grid(dash-mobile);
+  }
+  &__social { //===================================> Social Section
+    @include grid(dash-social);
+    & .wrapper {
+      padding: 10px;
+      border: 1px solid darken($bg, 8%);
+      border-radius: 4px;
+      margin: 0 5px;
+      width: calc(100% /3 - 10px);
+      max-width: 300px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+      transition: box-shadow .2s ease-out,
+                  transform .2s ease-out;
+      &:hover {
+        transform: scale(1.05);
+        box-shadow: 0 0 3px 1px darken($bg, 5%);
+      }
+      @include mq(768px) {
+        padding: 20px;
+      }
+      @include mq(1024px) {
+        display: grid;
+        grid-template-columns: 1fr 1.5fr;
+        grid-template-rows: 1fr 4fr;
+        grid-template-areas:
+          "icon heading"
+          "icon number";
+        margin: 0 20px;
+        width: calc(100% /3 - 40px);
+      }
+    }
+    &-items {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      padding: 20px 0;
+    }
+    & .icon {
+      background: darken($accent,12%);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 55px;
+      height: 55px;
+      margin-bottom: 10px;
+      @include grid(icon);
+      @include mq(768px) {
+        width: 65px;
+        height: 65px;
+      }
+      @include mq(1024px) {
+        width: 80px;
+        height: 80px;
+      }
+      &.twitter svg {
+        transform: translateY(3px);
+      }
+      &.facebook svg {
+        transform: scale(1.1) translateY(-1px);
+      }
+      &.googleplus svg {
+        transform: translateY(2px) scale(.9);
+      }
+    }
+    & svg {
+      fill: #fff;
+      width: 30px;
+      height: 30px;
+      transform-origin: 50% 50%;
+      transform-box: fill-box;
+      @include mq(768px) {
+        width: 35px;
+        height: 35px;
+      }
+      @include mq(1024px) {
+        width: 40px;
+        height: 40px;
+      }
+    }
+    & h4 {
+      margin: 0;
+      color: $accent;
+      display: none;
+      font-size: .95rem;
+      letter-spacing: .2px;
+      @include grid(heading);
+      @include mq(768px) {
+        display: inline-block;
+      }
+      @include mq(1024px) {
+        font-size: 1rem;
+        align-self: flex-end;
+      }
+    }
+    & span {
+      margin: 0 0 auto;
+      font-size: 1.2rem;
+      font-family: 'Open Sans', sans-serif;
+      color: darken($bg, 30%);
+      @include grid(number);
+      @include mq(768px) {
+        font-size: 1.9rem;
+      }
+      @include mq(1024px) {
+        font-size: 3rem;
+      }
+    }
+  }
+  &__members { //===================================> Members Section
+    @include grid(dash-members);
+    &-item {
+      display: flex;
+      width: 100%;
+      padding: 12px 0;
+      font-family: 'Roboto', sans-serif;
+      align-items: center;
+      &:first-of-type {
+        margin-top: 20px;
+      }
+      &:not(:last-of-type) {
+        border-bottom: 1px solid $bg;
+      }
+    }
+    & img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      margin-right: 15px;
+      &:hover {
+        @extend %hover;
+      }
+    }
+    &-name {
+      color: darken($bg, 45%);
+      font-size: .9rem;
+      &:hover {
+        @extend %hover;
+      }
+    }
+    &-email {
+      margin: 0;
+      color: darken($accent,12%);
+      font-size: .8rem;
+      display: none;
+      @include mq(768px) {
+        display: block;
+      }
+    }
+    & .date {
+      margin-left: auto;
+      color: darken($bg, 45%);
+      font-size: .9rem;
+    }
+  }
+  &__recent { //====================================> Recent Activity Section
+    @include grid(dash-recent);
+    &-item {
+      display: flex;
+      width: 100%;
+      padding: 12px 0;
+      font-family: 'Roboto', sans-serif;
+      align-items: center;
+      &:first-of-type {
+        margin-top: 20px;
+      }
+      &:not(:last-of-type) {
+        border-bottom: 1px solid $bg;
+      }
+    }
+    & img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      margin-right: 15px;
+      &:hover {
+        @extend %hover;
+      }
+    }
+    &-text {
+      color: darken($bg, 45%);
+      font-size: .9rem;
+      margin-right: 20px;
+      &:hover {
+        @extend %hover;
+      }
+    }
+    &-date {
+      margin: 0;
+      color: darken($bg,20%);
+      font-size: .8rem;
+    }
+    & svg {
+      width: 15px;
+      height: 15px;
+      margin-left: auto;
+    }
+    & .arrow {
+      fill: darken($accent,5%);
+    }
+  }
+  &__msg { //=======================================> Message Section
+    @include grid(dash-msg);
+    & form {
+      display: flex;
+      flex-direction: column;
+      margin-top: 20px;
+      position: relative;
+    }
+    & input, & textarea {
+      outline: none;
+      border: 2px solid $bg;
+      margin-bottom: 15px;
+      border-radius: 3px;
+      padding: 10px;
+      font-size: .9rem;
+      transition: background .2s ease;
+      &::placeholder {
+        color: darken($bg, 10%);
+      }
+      &:focus {
+        background: $bg;
+      }
+    }
+    & input {
+      height: 40px;
+    }
+    & ul {
+      background: darken($bg, 5%);
+      padding: 0;
+      margin: 0;
+      width: 100%;
+      position: absolute;
+      top: 40px;
+      display: none;
+    }
+    & li {
+      list-style-type: none;
+      padding: 10px;
+      &:hover {
+        background: darken($bg, 15%);
+        @extend %hover;
+      }
+    }
+    & textarea {
+      height: 150px;
+      resize: none;
+    }
+    & button {
+      outline: none;
+      border: none;
+      padding: 15px 0;
+      color: #fff;
+      font-size: .9rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      background: lighten($accent, 5%);
+      transition: background .1s ease-out;
+      border-radius: 3px;
+      &:hover {
+        @extend %hover;
+        background: darken($accent,2%);
+      }
+      &:active {
+        background: darken($accent,10%);
+      }
+    }
+  }
+  &__settings { //==================================> Settings Section
+    @include grid(dash-settings);
+    display: flex;
+    flex-direction: column;
+    &-item {
+      display: flex;
+      align-items: center;
+      &:first-of-type {
+        margin-top: 20px;
+      }
+      &:not(:last-of-type) {
+        margin-bottom: 20px;
+      }
+      &:last-of-type {
+        margin-bottom: 50px;
+      }
+    }
+    & p {
+      margin: 0;
+      width: 180px;
+      font-size: .9rem;
+      color: darken($bg, 45%);
+    }
+    & .switch {
+      background: $bg;
+      border-radius: 20px;
+      width: 70px;
+      height: 28px;
+      border: 2px solid darken($bg,5%);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: relative;
+      &-circle {
+        width: 22px;
+        height: 22px;
+        background: #fff;
+        border: 2px solid darken($bg,5%);
+        border-radius: 50%;
+        transition: transform .3s;
+        &:hover {
+          @extend %hover;
+        }
+      }
+    }
+    & input {
+      display: none;
+      &#email, &#public {
+        &_on {
+          &:checked ~ .on {
+            display: none;
+          }
+          &:checked ~ .off {
+            display: block;
+          }
+          &:checked ~ .switch-circle {
+            transform: translateX(0);
+          }
+        }
+        &_off {
+          &:checked ~ .off {
+            display: none;
+          }
+          &:checked ~ .on {
+            display: block;
+          }
+          &:checked ~ .switch-circle {
+            transform: translateX(44px);
+          }
+        }
+      }
+    }
+    & label {
+      font-size: .8rem;
+      font-weight: 500;
+      padding: 0 10px;
+      position: absolute;
+      &:hover {
+        @extend %hover;
+      }
+      &.on {
+        left: 0;
+      }
+      &.off {
+        color: #fff;
+        right: 0;
+      }
+    }
+    &-timezone {
+      width: 100%;
+      outline: none;
+      border: 2px solid $bg;
+      margin-top: auto;
+      margin-bottom: 15px;
+      border-radius: 3px;
+      padding: 10px;
+      font-size: .9rem;
+      transition: background .2s ease;
+      &:focus {
+        background: $bg;
+      }
+    }
+    &-buttons {
+      display: flex;
+      justify-content: space-between;
+    }
+    & button {
+      width: 49%;
+      margin: 0;
+      outline: none;
+      border: none;
+      padding: 15px 0;
+      color: #fff;
+      font-size: .9rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      transition: background .1s ease-out;
+      border-radius: 3px;
+      &:hover {
+        @extend %hover;
+      }
+      &#save {
+        background: lighten($accent, 5%);
+        &:hover {
+          background: darken($accent,2%);
+        }
+        &:active {
+          background: darken($accent,10%);
+        }
+      }
+      &#cancel {
+        background: darken($bg, 15%);
+        &:hover {
+          background: darken($bg,20%);
+        }
+        &:active {
+          background: darken($bg,25%);
+        }
+      }
+    }
+  }
+}

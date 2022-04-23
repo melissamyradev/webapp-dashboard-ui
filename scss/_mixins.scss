@@ -1,0 +1,11 @@
+// grid-area name
+@mixin grid($name) {
+  grid-area: $name;
+}
+
+// media query
+@mixin mq($breakpoint) {
+  @media (min-width: $breakpoint) {
+    @content;
+  }
+}
